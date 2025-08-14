@@ -1,0 +1,53 @@
+# ------------------------
+# Node / package managers
+# ------------------------
+**/node_modules
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+.pnp.*
+# if you use pnpm
+.pnpm-debug.log*
+
+# ------------------------
+# Build outputs
+# ------------------------
+**/dist
+**/.next
+**/out
+**/build
+**/.turbo
+**/coverage
+
+# ------------------------
+# Env files & secrets
+# ------------------------
+.env
+*.pem
+
+# ------------------------
+# OS / Editor junk
+# ------------------------
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+.vscode/
+.idea/
+_temp/
+
+# ------------------------
+# TypeScript
+# ------------------------
+*.tsbuildinfo
+
+# ------------------------
+# Logs
+# ------------------------
+*.log

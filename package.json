@@ -1,0 +1,42 @@
+{
+  "name": "mini-focus-dashboard",
+  "version": "1.0.0",
+  "description": "## Version 0.1.0 – 27 Jul 2025",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "npm run dev -w apps/frontend & npm run dev -w apps/backend",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write .",
+    "format:ci": "prettier --check .",
+    "docker:init": "docker compose up -d db cache"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "@wordpress/block-editor": "^15.0.0",
+    "@wordpress/element": "^6.27.0",
+    "@wordpress/scripts": "^30.20.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.4.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "prettier": "^3.6.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  },
+  "private": "true",
+  "workspaces": [
+    "apps/*"
+  ],
+  "overrides": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  }
+}

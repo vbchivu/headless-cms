@@ -1,0 +1,77 @@
+services:
+  # Primary Postgres for your apps (ports 5433→5432)
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: pgadmin
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: mfd
+    ports:
+      - "5433:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "pgadmin", "-d", "mfd"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis cache (ports 6380→6379)
+  cache:
+    image: redis:7
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # WordPress database (MariaDB)
+  cms-db:
+    image: mariadb:10.11
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - cms-db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # WordPress Apache + PHP image
+  wordpress:
+    image: wordpress:6.5-php8.3-apache
+    depends_on:
+      cms-db:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST: cms-db:3306
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: 0 # Disable debug mode
+    ports:
+      - "8080:80"
+    volumes:
+      # Persistent WP core + uploads
+      - cms-wp-data:/var/www/html
+      # Bind-mount your local plugin & theme code (fixed paths)
+      - ./cms/plugins:/var/www/html/wp-content/plugins
+      - ./cms/themes:/var/www/html/wp-content/themes
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  db-data:
+  cms-db-data:
+  cms-wp-data:

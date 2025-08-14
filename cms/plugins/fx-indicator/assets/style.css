@@ -1,0 +1,188 @@
+/* FX Indicator Card Styles */
+.fx-indicator-card {
+    background: #ffffff;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 16px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    max-width: 400px;
+}
+
+.fx-indicator-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.fx-indicator-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 12px;
+}
+
+.fx-indicator-header h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.fx-indicator-country {
+    background: #007cba;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.fx-indicator-content {
+    margin: 20px 0;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fx-indicator-loading {
+    color: #666;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+}
+
+.fx-indicator-loading::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-top: 2px solid #007cba;
+    border-radius: 50%;
+    animation: fx-spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes fx-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.fx-indicator-value {
+    text-align: center;
+}
+
+.fx-indicator-value .value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #007cba;
+    display: block;
+    line-height: 1.2;
+}
+
+.fx-indicator-value .unit {
+    font-size: 14px;
+    color: #666;
+    font-weight: 400;
+    margin-left: 4px;
+}
+
+.fx-indicator-error {
+    color: #d63638;
+    text-align: center;
+    font-style: italic;
+}
+
+.fx-indicator-meta {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.fx-indicator-meta small {
+    color: #666;
+    font-size: 12px;
+}
+
+/* Animation classes */
+.fx-fade-in {
+    animation: fx-fade-in 0.5s ease-in;
+}
+
+@keyframes fx-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Editor-specific styles */
+.fx-indicator-editor {
+    border: 2px dashed #007cba;
+    background: #f8f9fa;
+}
+
+.fx-indicator-placeholder {
+    color: #666;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .fx-indicator-card {
+        margin: 12px 0;
+        padding: 16px;
+    }
+
+    .fx-indicator-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .fx-indicator-value .value {
+        font-size: 24px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .fx-indicator-card {
+        background: #1a1a1a;
+        border-color: #333;
+        color: #fff;
+    }
+
+    .fx-indicator-header h4 {
+        color: #fff;
+    }
+
+    .fx-indicator-header {
+        border-bottom-color: #333;
+    }
+
+    .fx-indicator-meta {
+        border-top-color: #333;
+    }
+
+    .fx-indicator-editor {
+        background: #2a2a2a;
+        border-color: #007cba;
+    }
+}
